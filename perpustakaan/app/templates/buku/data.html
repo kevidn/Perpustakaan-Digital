@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="card mt-4">
+    <div class="card-header">
+        <i class="fas fa-table me-1"></i>
+        {{ title }}
+    </div>
+    <div class="card-body">
+        <table id="datatablesSimple" style="width: 1000px;" >
+            <thead>
+                <tr>
+                    <th>Judul</th>
+                    <th>Penulis</th>
+                    <th>Penerbit</th>
+                    <th>Tahun Terbit</th>
+                    <th>Kategori</th>
+                    <th>Aksi</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for buku in data %}
+            <tr>
+                <td>{{ buku.judul }}</td>
+                <td>{{ buku.penulis }}</td>
+                <td>{{ buku.penerbit }}</td>
+                <td>{{ buku.tahun_terbit }}</td>
+                <td>{{ buku.kategori }}</td>
+                <td>
+                    <a class="btn btn-primary" href="{% url "edit_buku" buku.id %}">EDIT</a>
+                    <a class="btn btn-danger" href="{% url "hapus_buku" buku.id %}" onclick="return confirm('Apakah anda yakin ingin menghapus data buku {{ buku.judul }}')">HAPUS</a>
+                </td>
+            </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+{% endblock content %}
