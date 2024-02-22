@@ -8,21 +8,20 @@
         {{ title }}
     </div>
     <div class="card-body">
-        <a href="{% url "tambah_kategori" %}" class="btn btn-success">Tambah Kategori</a>
+        <a href="{% url "tambah_koleksi" %}" class="btn btn-success">Tambah Koleksi</a>
         <table id="datatablesSimple" style="width: 1000px;" >
             <thead>
                 <tr>
-                    <th>Nama</th>
+                    <th>Buku</th>
                     <th>Aksi</th>
                 </tr>
             </thead>
             <tbody>
-            {% for kategori in data %}
+            {% for koleksi in data %}
             <tr>
-                <td>{{ kategori.nama }}</td>
+                <td>{{ koleksi.buku }}</td>
                 <td>
-                    <a class="btn btn-primary" href="{% url "edit_kategori" kategori.id %}">EDIT</a>
-                    <a class="btn btn-danger" href="{% url "hapus_kategori" kategori.id %}" onclick="return confirm('Apakah anda yakin ingin menghapus data kategori {{ kategori.nama }}')">HAPUS</a>
+                    <a class="btn btn-danger" href="{% url "hapus_koleksi" koleksi.id %}" onclick="return confirm('Apakah anda yakin ingin menghapus koleksi ?')">HAPUS</a>
                 </td>
             </tr>
             {% endfor %}

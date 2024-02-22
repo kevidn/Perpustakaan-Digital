@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="card mt-4">
+    <div class="card-header">
+        <i class="fas fa-table me-1"></i>
+        {{ title }}
+    </div>
+    <div class="card-body">
+        <table id="datatablesSimple" style="width: 1000px;" >
+            <thead>
+                <tr>
+                    <th>Buku</th>
+                    <th>Tanggal Peminjaman</th>
+                    <th>Tanggal Pengembalian</th>
+                    <th>Status</th>
+                    <th>Aksi</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for pinjam in data %}
+            <tr>
+                <td>{{ pinjam.buku }}</td>
+                <td>{{ pinjam.tanggal_peminjaman }}</td>
+                <td>{{ pinjam.tanggal_pengembalian }}</td>
+                <td>{{ pinjam.status }}</td>
+                <td>
+                    <a class="btn btn-danger" href="{% url "hapus_peminjaman_pribadi" pinjam.id %}" onclick="return confirm('Apakah anda yakin ingin menghapus koleksi ?')">HAPUS</a>
+                </td>
+            </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+{% endblock content %}

@@ -44,8 +44,9 @@ class Koleksi(models.Model):
 class Pinjam(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     buku = models.ForeignKey('Buku', on_delete=models.CASCADE)
-    tanggal_peminjaman = models.DateField(auto_now_add=True)
+    tanggal_peminjaman = models.DateField()
     tanggal_pengembalian = models.DateField()
+    status = models.CharField(max_length=255)
 
     def __str__(self):
         return f'{self.user.username} - {self.buku.judul}'

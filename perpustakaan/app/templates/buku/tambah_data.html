@@ -10,13 +10,11 @@
             <li class="breadcrumb-item active">{{ title }}</li>
         </ol>
         {% if messages %}
-        <ul class="messages">
             {% for messages in messages %}
-            <div class="messages messages-success">
+            <div class="alert alert-success">
                 {{ messages }}
             </div>
             {% endfor %}
-        </ul>
         {% endif %}
 
     <div class="row">
@@ -26,6 +24,7 @@
                 {{ form|crispy }}
 
                 <button class="btn btn-success" type="submit">Submit</button>
+                <a href="{% url "data_buku" %}" class="btn btn-primary">Kembali</a>
             </form>
         </div>
     </div>

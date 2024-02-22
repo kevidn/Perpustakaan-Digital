@@ -2,13 +2,20 @@
 
 {% block content %}
 
-<div class="card mt-4">
+<div class="card mt-5">
     <div class="card-header">
         <i class="fas fa-table me-1"></i>
         {{ title }}
     </div>
     <div class="card-body">
-        <table id="datatablesSimple" style="width: 1000px;" >
+        {% if request.user.groups.all.0.name == 'petugas' %}
+        <a class="btn btn-primary" href="{% url "tambah_buku" %}" class="btn btn-success">Tambah Buku</a>
+        {% elif request.user.groups.all.0.name == 'administrator' %}
+        <a class="btn btn-primary" href="{% url "tambah_buku" %}" class="btn btn-success">Tambah Buku</a>
+        {% elif request.user.groups.all.0.name == 'peminjam' %}
+        <a class="btn btn-primary" href="{% url "tambah_peminjaman" %}">Pinjam Buku</a>
+        {% endif %}
+        <table id="datatablesSimple" style="width: 1000px" >
             <thead>
                 <tr>
                     <th>Judul</th>
@@ -16,7 +23,12 @@
                     <th>Penerbit</th>
                     <th>Tahun Terbit</th>
                     <th>Kategori</th>
+                    {% if request.user.groups.all.0.name == 'petugas' %}
                     <th>Aksi</th>
+                    {% elif request.user.groups.all.0.name == 'administrator' %}
+                    <th>Aksi</th>
+                    {% elif request.user.groups.all.0.name == 'peminjam' %}
+                    {% endif %}
                 </tr>
             </thead>
             <tbody>
@@ -26,10 +38,16 @@
                 <td>{{ buku.penulis }}</td>
                 <td>{{ buku.penerbit }}</td>
                 <td>{{ buku.tahun_terbit }}</td>
-                <td>{{ buku.kategori }}</td>
+                <td>{{ buku.kategori.all.0 }} {{ buku.kategori.all.1 }} {{ buku.kategori.all.2 }} {{ buku.kategori.all.3 }} {{ buku.kategori.all.4 }} {{ buku.kategori.all.5 }} {{ buku.kategori.all.6 }} {{ buku.kategori.all.7 }} {{ buku.kategori.all.8 }} {{ buku.kategori.all.9 }} {{ buku.kategori.all.10 }} {{ buku.kategori.all.11 }}</td>
                 <td>
+                    {% if request.user.groups.all.0.name == 'petugas' %}
                     <a class="btn btn-primary" href="{% url "edit_buku" buku.id %}">EDIT</a>
                     <a class="btn btn-danger" href="{% url "hapus_buku" buku.id %}" onclick="return confirm('Apakah anda yakin ingin menghapus data buku {{ buku.judul }}')">HAPUS</a>
+                    {% elif request.user.groups.all.0.name == 'administrator' %}
+                    <a class="btn btn-primary" href="{% url "edit_buku" buku.id %}">EDIT</a>
+                    <a class="btn btn-danger" href="{% url "hapus_buku" buku.id %}" onclick="return confirm('Apakah anda yakin ingin menghapus data buku {{ buku.judul }}')">HAPUS</a>
+                    {% elif request.user.groups.all.0.name == 'peminjam' %}
+                    {% endif %}
                 </td>
             </tr>
             {% endfor %}

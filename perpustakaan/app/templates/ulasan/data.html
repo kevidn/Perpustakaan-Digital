@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="card mt-4">
+    <div class="card-header">
+        <i class="fas fa-table me-1"></i>
+        {{ title }}
+    </div>
+    <div class="card-body">
+        <a href="{% url "tambah_ulasan" %}" class="btn btn-success">Tambah Ulasan</a>
+        <table id="datatablesSimple" style="width: 1000px;" >
+            <thead>
+                <tr>
+                    <th>User</th>
+                    <th>Buku</th>
+                    <th>Ulasan</th>
+                    <th>Rating</th>
+                    {% if request.user.groups.all.0.name == 'peminjam' %}
+
+                    {% elif request.user.groups.all.0.name == 'petugas' %}
+                    <th>Aksi</th>
+                    {% elif request.user.groups.all.0.name == 'administrator' %}
+                    <th>Aksi</th>
+                    {% endif %}
+                </tr>
+            </thead>
+            <tbody>
+            {% for ulasan in data %}
+            <tr>
+                <td>{{ ulasan.user }}</td>
+                <td>{{ ulasan.buku }}</td>
+                <td>{{ ulasan.ulasan }}</td>
+                <td>{{ ulasan.rating }}</td>
+                <td>
+                    {% if request.user.groups.all.0.name == 'peminjam' %}
+
+                    {% elif request.user.groups.all.0.name == 'petugas' %}
+                    <a class="btn btn-primary" href="{% url "edit_ulasan" ulasan.id %}">EDIT</a>
+                    <a class="btn btn-danger" href="{% url "hapus_ulasan" ulasan.id %}" onclick="return confirm('Apakah anda yakin ingin menghapus data ?')">HAPUS</a>
+                    {% elif request.user.groups.all.0.name == 'administrator' %}
+                    <a class="btn btn-primary" href="{% url "edit_ulasan" ulasan.id %}">EDIT</a>
+                    <a class="btn btn-danger" href="{% url "hapus_ulasan" ulasan.id %}" onclick="return confirm('Apakah anda yakin ingin menghapus data ?')">HAPUS</a>
+                    {% endif %}
+                </td>
+            </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+{% endblock content %}

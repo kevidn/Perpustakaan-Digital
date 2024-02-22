@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h2>Data Peminjaman Buku</h2>
+
+<table id="datatablesSimple" style="width: 1000px;" >
+    <thead>
+        <tr>
+            <th>User</th>
+            <th>Buku</th>
+            <th>Tanggal Peminjaman</th>
+            <th>Tanggal Pengembalian</th>
+            <th>Status</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for pinjam in data %}
+    <tr>
+        <td>{{ pinjam.user }}</td>
+        <td>{{ pinjam.buku }}</td>
+        <td>{{ pinjam.tanggal_peminjaman }}</td>
+        <td>{{ pinjam.tanggal_pengembalian }}</td>
+        <td>{{ pinjam.status }}</td>
+    </tr>
+    {% endfor %}
+    </tbody>
+</table>
+
+{% endblock content %}

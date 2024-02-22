@@ -8,14 +8,14 @@
     <div class="row">
         <div class="col-cl-5">
             <div class="card mx-auto" style="width: 400px;">
-                <div class="card-header"><div class="card-title">Login</div></div>
+                <div class="card-header"><div class="card-title">{{ title }}</div></div>
                 <div class="card-body">
                     <form action="" method="post">
                         {% csrf_token %}
                         {{ form|crispy }}
         
                         <button class="btn btn-success" type="submit">Submit</button>
-                        <h6>Belum mempunyai akun? <a href="{% url 'signup' %}">Sign Up</a></h6>
+                        <h6>Sudah mempunyai akun? <a href="{% url 'login' %}">Login</a></h6>
                     </form>
                 </div>
             </div>
