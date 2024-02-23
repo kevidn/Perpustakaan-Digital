@@ -32,10 +32,9 @@ class FormKategori(ModelForm):
 class FormPeminjaman(ModelForm):
     class Meta:
         model = Pinjam
-        exclude = ('user', 'status', 'tanggal_peminjaman', )
+        exclude = ('user', 'status', 'tanggal_peminjaman', 'buku', )
 
         widgets = {
-            'buku': forms.Select(choices=[('buku.id', 'buku.judul') for buku in Buku.objects.all()]),
             'tanggal_pengembalian': forms.DateInput(attrs={'type':'date'}),
         }
 

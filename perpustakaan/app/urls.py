@@ -26,7 +26,7 @@ urlpatterns = [
     # Peminjaman Buku.
     path('pinjam/', data_peminjaman, name='data_peminjaman'),
     path('pinjam/pribadi/', data_peminjaman_pribadi, name='data_peminjaman_pribadi'),
-    path('pinjam/tambah/', tambah_peminjaman, name='tambah_peminjaman'),
+    path('pinjam/tambah/<int:id_buku>', tambah_peminjaman, name='tambah_peminjaman'),
     path('pinjam/print/', print_peminjaman, name='print_peminjaman'),
     path('pinjam/edit/<int:id_pinjam>', edit_peminjaman, name='edit_peminjaman'),
     path('pinjam/hapus/<int:id_pinjam>', hapus_peminjaman, name='hapus_peminjaman'),

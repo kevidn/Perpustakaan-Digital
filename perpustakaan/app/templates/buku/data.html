@@ -9,11 +9,11 @@
     </div>
     <div class="card-body">
         {% if request.user.groups.all.0.name == 'petugas' %}
-        <a class="btn btn-primary" href="{% url "tambah_buku" %}" class="btn btn-success">Tambah Buku</a>
+        <a class="btn btn-success" href="{% url "tambah_buku" %}">Tambah Buku</a>
         {% elif request.user.groups.all.0.name == 'administrator' %}
-        <a class="btn btn-primary" href="{% url "tambah_buku" %}" class="btn btn-success">Tambah Buku</a>
+        <a class="btn btn-success" href="{% url "tambah_buku" %}">Tambah Buku</a>
         {% elif request.user.groups.all.0.name == 'peminjam' %}
-        <a class="btn btn-primary" href="{% url "tambah_peminjaman" %}">Pinjam Buku</a>
+        
         {% endif %}
         <table id="datatablesSimple" style="width: 1000px" >
             <thead>
@@ -47,6 +47,7 @@
                     <a class="btn btn-primary" href="{% url "edit_buku" buku.id %}">EDIT</a>
                     <a class="btn btn-danger" href="{% url "hapus_buku" buku.id %}" onclick="return confirm('Apakah anda yakin ingin menghapus data buku {{ buku.judul }}')">HAPUS</a>
                     {% elif request.user.groups.all.0.name == 'peminjam' %}
+                    <a class="btn btn-success" href="{% url "tambah_peminjaman" buku.id %}">PINJAM</a>
                     {% endif %}
                 </td>
             </tr>
