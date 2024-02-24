@@ -38,7 +38,11 @@
                 <td>{{ buku.penulis }}</td>
                 <td>{{ buku.penerbit }}</td>
                 <td>{{ buku.tahun_terbit }}</td>
-                <td>{{ buku.kategori.all.0 }} {{ buku.kategori.all.1 }} {{ buku.kategori.all.2 }} {{ buku.kategori.all.3 }} {{ buku.kategori.all.4 }} {{ buku.kategori.all.5 }} {{ buku.kategori.all.6 }} {{ buku.kategori.all.7 }} {{ buku.kategori.all.8 }} {{ buku.kategori.all.9 }} {{ buku.kategori.all.10 }} {{ buku.kategori.all.11 }}</td>
+                <td>
+                    {% for kategori in buku.kategori.all %}
+                      {{ kategori.nama }}
+                    {% endfor %}
+                </td>
                 <td>
                     {% if request.user.groups.all.0.name == 'petugas' %}
                     <a class="btn btn-primary" href="{% url "edit_buku" buku.id %}">EDIT</a>

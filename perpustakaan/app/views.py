@@ -232,35 +232,28 @@ def print_peminjaman(request):
 @permission_required('app.add_pinjam',login_url=settings.LOGIN_URL, raise_exception=True)
 @login_required(login_url=settings.LOGIN_URL)
 def tambah_peminjaman(request, id_buku):
-    buku = Buku.objects.get(id=id_buku)
+    buku = Buku.objects.get(pk=id_buku)
     if request.POST:
         form = FormPeminjaman(request.POST, instance=buku)
         if form.is_valid():
             form = form.save(commit=False)
-            form.buku = buku
             form.user = request.user
             form.status = 'Dipinjam'
             form.tanggal_peminjaman = timezone.now()
 
             form.save()
 
-            all = {
-                'title':'Form Peminjaman Buku', 
-                'form':form,
-                'buku':buku,
-            }
-
             return redirect('data_peminjaman_pribadi')
     else:
         form = FormPeminjaman(instance=buku)
-        
-    all = {
-        'title':'Form Peminjaman Buku', 
-        'form':form,
-        'buku':buku,
+
+    context = {
+        'title': 'Form Peminjaman Buku',
+        'form': form,
+        'buku': buku,
     }
 
-    return render(request, 'pinjam/tambah_data.html', all)
+    return render(request, 'pinjam/tambah_data.html', context)
 
 # Page untuk mengedit data peminjaman.
 @permission_required('app.change_pinjam',login_url=settings.LOGIN_URL, raise_exception=True)
